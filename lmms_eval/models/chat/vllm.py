@@ -98,9 +98,9 @@ class VLLM(VLLMSimple):
             if self.chat_template is not None:
                 with open(self.chat_template, "r") as f:
                     chat_template = f.read()
-                response = self.client.chat(sampling_params=sampling_params, messages=batched_messages, chat_template=chat_template, chat_template_kwargs={"enable_thinking": False})
+                response = self.client.chat(sampling_params=sampling_params, messages=batched_messages, chat_template=chat_template, chat_template_kwargs={"enable_thinking": self.enable_thinking})
             else:
-                response = self.client.chat(sampling_params=sampling_params, messages=batched_messages, chat_template_kwargs={"enable_thinking": False})
+                response = self.client.chat(sampling_params=sampling_params, messages=batched_messages, chat_template_kwargs={"enable_thinking": self.enable_thinking})
             end_time = time.time()
 
             response_text = [o.outputs[0].text for o in response]
